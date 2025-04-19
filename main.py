@@ -175,30 +175,13 @@ class MiMotion():
             user = str(self.check_item.get("user"))
             password = str(self.check_item.get("password"))
             hea = {'User-Agent': 'Mozilla/5.0'}
-            url = r'https://apps.game.qq.com/CommArticle/app/reg/gdate.php'
-            r = requests.get(url=url, headers=hea)
-            if r.status_code == 200:
-                result = r.text
-                pattern = re.compile('\\d{4}-\\d{2}-\\d{2} (\\d{2}):\\d{2}:\\d{2}')
-                find = re.search(pattern, result)
-                hour = find.group(1)
-                min_ratio = int(hour) / 22
-                max_ratio = int(hour) / 21
-                step_ratio = random.uniform(min_ratio, max_ratio)
-            else:
-                min_ratio = 0.5
-                max_ratio = 0.9
-                step_ratio = random.uniform(min_ratio, max_ratio)
-        except Exception as e:
-            error_traceback = traceback.format_exc()
-            print(error_traceback)
         try:
-            min_step = math.ceil(int(self.check_item.get("min_step", 10000))*step_ratio)
+            min_step = int(self.check_item.get("min_step", 10000))
         except Exception as e:
-            print("初始化步数失败: 已将最小值设置为 19999", e)
+            print("初始化步数失败: 已将最小值设置为 10000", e)
             min_step = 10000
         try:
-            max_step = math.ceil(int(self.check_item.get("max_step", 19999))*step_ratio)
+            max_step = int(self.check_item.get("max_step", 19999))
         except Exception as e:
             print("初始化步数失败: 已将最大值设置为 19999", e)
             max_step = 19999
