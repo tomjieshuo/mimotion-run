@@ -171,10 +171,9 @@ class MiMotion():
             return 0, None
 
     def main(self):
-        try:
-            user = str(self.check_item.get("user"))
-            password = str(self.check_item.get("password"))
-            hea = {'User-Agent': 'Mozilla/5.0'}
+        user = str(self.check_item.get("user"))
+        password = str(self.check_item.get("password"))
+        hea = {'User-Agent': 'Mozilla/5.0'}
         try:
             min_step = int(self.check_item.get("min_step", 10000))
         except Exception as e:
